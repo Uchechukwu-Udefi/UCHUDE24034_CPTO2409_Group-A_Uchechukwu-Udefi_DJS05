@@ -20,3 +20,17 @@ const add = () => {
 console.log(add()); 
 console.log(add());  
 console.log(getState());
+
+//decrement function
+const subtract = () => {
+    state = {
+        ...state,
+        value: state.value - 1,
+    };
+    return state;
+};
+
+//decrement function test
+console.log(subtract());
+console.log(getState());
+
