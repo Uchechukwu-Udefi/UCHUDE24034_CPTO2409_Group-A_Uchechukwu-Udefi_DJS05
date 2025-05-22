@@ -1,8 +1,3 @@
-//initial state verification set value to 0 and result log to console.
-const initial = {
-  value: 0,
-};
-
 /**
  * @callback Action
  * @param {State}
@@ -19,6 +14,13 @@ const initial = {
 *@props {Update} update
 */
 
+//initial state verification set value to 0
+const initial = {
+  value: 0,
+};
+
+
+//create store function with initial state
 const createStore = () => {
   let state = initial
 
