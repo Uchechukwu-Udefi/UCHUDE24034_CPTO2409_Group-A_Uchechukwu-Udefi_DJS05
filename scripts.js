@@ -18,8 +18,7 @@ const add = () => {
 
 //increment function test
 console.log(add()); 
-console.log(add());  
-console.log(getState());
+console.log(add());
 
 //decrement function
 const subtract = () => {
@@ -32,7 +31,6 @@ const subtract = () => {
 
 //decrement function test
 console.log(subtract());
-console.log(getState());
 
 //reset function
 const reset = () => {
