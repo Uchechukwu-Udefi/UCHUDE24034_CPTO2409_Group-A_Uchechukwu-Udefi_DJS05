@@ -34,3 +34,23 @@ const subtract = () => {
 console.log(subtract());
 console.log(getState());
 
+//reset function
+const reset = () => {
+    state = {
+        ...state,
+        value: 0,
+    };
+    return state;
+};
+
+//reset function test
+console.log(reset());
+
+//log function
+const log = (state, callback) => {
+    callback(state.value);
+};
+//log function test
+log(state, (value) => {
+    console.log(`Current value is: ${value}`);
+});
