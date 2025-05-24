@@ -1,3 +1,22 @@
+import { update, subscribe, Action } from "./store/store.js";
+
+// Subscribe to state changes
+const handler = (prev, next) => console.log("Prev:", prev, "Next:", next);
+const unsubscribe = subscribe(handler);
+
+// Define an action
+const customAction = () => (state) => ({
+  ...state,
+  value: state.value + 1,
+});
+
+update(customAction());
+update(customAction());
+update(customAction());
+unsubscribe();
+
+/*
+
 //initial state verification set value to 0 and result log to console.
 let state = {
   value: 0,
@@ -52,3 +71,5 @@ const log = (state, callback) => {
 log(state, (value) => {
     console.log(`Current value is: ${value}`);
 });
+
+*/

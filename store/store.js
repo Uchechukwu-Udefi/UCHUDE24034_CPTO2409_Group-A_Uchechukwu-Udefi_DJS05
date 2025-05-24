@@ -22,9 +22,11 @@
  * @returns {State}
  */
 
+export const Action = () => {}
+
 /**
-*@callback Update
-*@param {Action}
+* @callback Update
+* @param {Action}
 */
 
 /**
@@ -33,9 +35,13 @@
  */
 
 /**
-*@typedef {Object} store
-*@prop {Update} update
-*@prop {Subscribe} subscribe
+ *@callback EmptyFn
+ */
+
+/**
+* @typedef {Object} store
+* @prop {Update} update
+* @prop {Subscribe} subscribe
 */
 
 //initial state verification set value to 0
@@ -53,14 +59,17 @@ const states = [initial];
 /**
  * @type {Array<Notify>}
  */
-const notifiers = [];
+let notifiers = [];
 
+/**
+ * @param {Action} action 
+ */
 
 export const update = (action) => {
   if (typeof action !== 'function') {
     throw new Error('Action must be a function');
   }
-  const prev = Object.freeze({ ...state[0] });
+  const prev = Object.freeze({ ...states[0] });
   const next = Object.freeze({ ...action(prev) });
 
   const handler = (notify) => notify(prev, next);
@@ -71,8 +80,8 @@ export const update = (action) => {
 /**
  * 
  * @param {Notify} notify
- * @returns 
- */
+ * @returns {}
+ *//*
 export const subscribe = (notify) => {
   notifiers.push(notify);
 
@@ -82,4 +91,69 @@ export const subscribe = (notify) => {
     notifiers = result;
   }
   return unsubscribe; 
+};*/
+
+///////////////////////////////////////////////////////
+//create store function with initial state
+/**
+ * @typedef {Function} Reducer
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {Object}  
+ */
+
+let state = { value: 0 };
+let listeners = [];
+
+export const getState = () => {
+  return state;
 };
+
+export const dispatch = (action) => {
+  state = reducer(state, action);
+  listeners.forEach(listener => listener());
+};
+
+export const subscribe = (listener) => {
+  listeners.push(listener);
+  return () => {
+    listeners = listeners.filter(l => l !== listener);
+  };
+};
+
+
+// Initialize state
+dispatch({ type: '__INIT__' });
+
+return { getState, dispatch, subscribe };
+
+/*
+export function createStore(reducer) {
+  
+  let state;
+  let listeners = [];
+
+  function getState() {
+    return state;
+  };
+
+   function dispatch(action) {
+    state = reducer(state, action);
+    listeners.forEach(listener => listener());
+  };
+
+  function subscribe(listener) {
+    listeners.push(listener);
+    return () => {
+      listeners = listeners.filter(l => l !== listener);
+    };
+  };
+
+
+  // Initialize state
+  dispatch({ type: '__INIT__' });
+
+  return { getState, dispatch, subscribe };
+};
+
+*/

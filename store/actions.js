@@ -1,3 +1,11 @@
+/**
+ * @param {Subscription} subscription
+ */
+export const subscribe = (subscription) => {
+    
+}
+
+/*
 //increment function
 export const add = () => {
   state = {
@@ -29,3 +37,5 @@ export const reset = () => {
 export const get = (state, key) => {
     return state[key];
 };
+
+*/
