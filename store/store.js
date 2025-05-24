@@ -102,30 +102,31 @@ export const subscribe = (notify) => {
  * @returns {Object}  
  */
 
-let state = { value: 0 };
-let listeners = [];
+export function createStore(reducer) {
+  let state;
+  let listeners = [];
 
-export const getState = () => {
-  return state;
+  function getState() {
+    return state;
+  }
+
+  function dispatch(action) {
+    state = reducer(state, action);
+    listeners.forEach(listener => listener());
+  }
+
+  function subscribe(listener) {
+    listeners.push(listener);
+    return () => {
+      listeners = listeners.filter(l => l !== listener);
+    };
+  }
+
+  // Initialize state
+  dispatch({ type: '__INIT__' });
+
+  return { getState, dispatch, subscribe };
 };
-
-export const dispatch = (action) => {
-  state = reducer(state, action);
-  listeners.forEach(listener => listener());
-};
-
-export const subscribe = (listener) => {
-  listeners.push(listener);
-  return () => {
-    listeners = listeners.filter(l => l !== listener);
-  };
-};
-
-
-// Initialize state
-dispatch({ type: '__INIT__' });
-
-return { getState, dispatch, subscribe };
 
 /*
 export function createStore(reducer) {
