@@ -1,9 +1,12 @@
 /**
- * @param {Subscription} subscription
+ * @typedef {Object} State
+ * @property {number} value
  */
-export const subscribe = (subscription) => {
-    
-}
+
+export const add = () => ({ type: 'ADD' });
+export const subtract = () => ({ type: 'SUBTRACT' });
+export const reset = () => ({ type: 'RESET' });
+
 
 /*
 //increment function
