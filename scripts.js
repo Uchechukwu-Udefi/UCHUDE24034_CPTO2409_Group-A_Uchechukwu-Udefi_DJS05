@@ -10,6 +10,7 @@ const store = createStore(tallyReducer);
 // and unsubscribe when no longer needed.
 const unsubscribe = store.subscribe(() => {
   console.log('State changed:', store.getState());
+
 });
 
 // Dispatch actions to modify the state
