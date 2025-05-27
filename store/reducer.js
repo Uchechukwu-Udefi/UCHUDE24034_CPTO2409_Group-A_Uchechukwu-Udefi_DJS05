@@ -30,7 +30,7 @@ export function tallyReducer(state = { count: 0 }, action) {
     case 'RESET':
       return { 
         count: 0 ,
-        comment: 'Count reset to zero'
+        comment: 'Counter reset to zero'
       };
 
     default:
